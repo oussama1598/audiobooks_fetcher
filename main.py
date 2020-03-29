@@ -1,9 +1,12 @@
 import inquirer
+import argparse
+import os
+
 from app.lib.audiobookbay import search_for_book, get_book_magnet
 from app.modules.transmission import Transmission
 
 
-def main():
+def main(output_dir):
     torrent_client = Transmission()
     torrent_client.get_token()
 
@@ -15,9 +18,6 @@ def main():
     print('Please wait while we get you the results.')
 
     result = search_for_book(query)
-
-    print(result)
-
     books_found = result['results']
 
     if not result['status']:
@@ -43,9 +43,14 @@ def main():
     print('Please wait while we grab the magnet url.')
 
     magnet_uri = get_book_magnet(selected_book_url)['magnet_uri']
-    torrent_client.add_torrent(magnet_uri)
+    torrent_client.add_torrent(magnet_uri, output_dir=output_dir)
 
     print('Torrent has been added to the selected torrent client.')
 
 
-main()
+parser = argparse.ArgumentParser(description='Process some integers.')
+parser.add_argument('--output', '-o', default=os.getcwd(),
+                    help='The output folder, where the audiobooks going to get saved to.')
+
+args = parser.parse_args()
+main(args.output)

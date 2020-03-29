@@ -23,7 +23,7 @@ class Transmission:
 
         self.id = code
 
-    def add_torrent(self, magnet, uri=None):
+    def add_torrent(self, magnet, output_dir=False):
         request = requests.post(
             self.RPC_URI,
             headers={
@@ -32,7 +32,7 @@ class Transmission:
             json={
                 'method': 'torrent-add',
                 'arguments': {
-                    'download-dir': False,
+                    'download-dir': output_dir,
                     'filename': magnet,
                     'paused': False
                 }

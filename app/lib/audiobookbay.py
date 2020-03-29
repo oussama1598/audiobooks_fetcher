@@ -44,6 +44,7 @@ def generate_magnet_from_data(torrent_hash, trackers):
 
 
 def search_for_book(query):
+    print(f'{WEBSITE_URL}{query}')
     request = requests.get(f'{WEBSITE_URL}{query}')
     request.encoding = 'utf-8'
 
