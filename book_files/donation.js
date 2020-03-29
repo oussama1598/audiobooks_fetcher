@@ -1,1 +1,0 @@
-document.write('<p>BitCoin Donation: <strong><a href="bitcoin:14byrmVgF82QKZt5FC3v6dt7K1vGB5iB67">14byrmVgF82QKZt5FC3v6dt7K1vGB5iB67</a></strong></p>');
